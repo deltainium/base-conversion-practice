@@ -1,6 +1,6 @@
 from random import randint
 
-def user_input() -> int:
+def user_input() -> tuple:
     command = None
 
     while 1:
@@ -16,18 +16,35 @@ def user_input() -> int:
         except:
             print("Invalid input, please try again\n")
             continue
+ 
+    acc = ("binary", "hex")
 
-    return digits
+    while 1:
+        command = input("Binary or hex?\n").lower()
 
-def challenge(digits):
+        if command not in acc:
+            print("Invalid input, please try again\n")
+            continue
+        else:
+            base = str(command)
+            break
+
+
+
+    return (digits, base)
+
+def challenge(digits: int, base: str):
     lower_bound = int("1"*digits)
     upper_bound = int("9"*digits)
 
     number = randint(lower_bound, upper_bound)
-    target = bin(number)[2:]
+    if base == "binary":
+        target = bin(number)[2:]
+    else:
+        target = hex(number)[2:]
     
     while 2:
-        answer = input(f"What will {number} be in binary? (q to quit)\n")
+        answer = input(f"What will {number} be in {base}? (q to quit)\n")
 
         if answer == target:
                 while 1:
@@ -51,8 +68,8 @@ def challenge(digits):
             continue
 
 def main():
-    digits = user_input()
-    challenge(digits)
+    digits, base = user_input()
+    challenge(digits, base)
 
 if __name__ == "__main__":
     main()
