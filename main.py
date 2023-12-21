@@ -44,7 +44,7 @@ def challenge(digits: int, base: str):
         target = hex(number)[2:]
     
     while 2:
-        answer = input(f"What will {number} be in {base}? (q to quit)\n")
+        answer = input(f"What will {number} be in {base}? (q to quit)\n").lower()
 
         if answer == target:
                 while 1:
@@ -56,7 +56,7 @@ def challenge(digits: int, base: str):
                         continue
                     else:
                         if command == "y":
-                            challenge(digits)
+                            challenge(digits, base)
                         else:
                             exit()
 
@@ -67,9 +67,7 @@ def challenge(digits: int, base: str):
             print("Incorrect, please try again")
             continue
 
-def main():
-    digits, base = user_input()
-    challenge(digits, base)
 
 if __name__ == "__main__":
-    main()
+    digits, base = user_input()
+    challenge(digits, base)
